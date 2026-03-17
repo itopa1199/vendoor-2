@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 :root {
+  --font-syne: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-manrope: 'Segoe UI', system-ui, -apple-system, sans-serif;
   --or: #F85606; --or2: #FF6B2B; --orl: #FFF3EE;
   --gn: #00853D; --gnl: #E8F7EF;
   --yw: #FFC200; --ywl: #FFFBEE;
@@ -16,8 +18,8 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { font-family: system-ui, sans-serif; color: var(--tx); background: var(--bg); overflow-x: hidden; }
-body { min-height: 100vh; overflow-x: hidden; }
+html { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: var(--tx); background: var(--bg); overflow-x: hidden; }
+body { min-height: 100vh; overflow-x: hidden; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
 button { cursor: pointer; border: none; background: none; font-family: inherit; }
 input, select, textarea { font-family: inherit; }
 img { display: block; max-width: 100%; object-fit: cover; }
