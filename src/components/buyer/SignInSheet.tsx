@@ -1,5 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation'
+import { MdStorefront, MdShoppingBag, MdListAlt, MdLogout } from 'react-icons/md'
 import { useUIStore } from '@/store/ui'
 import { useAuthStore } from '@/store/auth'
 
@@ -9,7 +10,6 @@ export default function SignInSheet() {
   const router = useRouter()
 
   if (!signInOpen) return null
-
   const go = (path: string) => { closeSignIn(); router.push(path) }
 
   return (
@@ -22,8 +22,8 @@ export default function SignInSheet() {
           {isAuthenticated() ? (
             <>
               <div className="flex items-center gap-4 mb-5 p-4 bg-[#F5F5F5] rounded-[12px]">
-                <div className="w-12 h-12 rounded-full bg-[#FFF3EE] flex items-center justify-center text-2xl flex-shrink-0">
-                  {isVendor() ? '🏪' : '🛍️'}
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${isVendor() ? 'bg-[#E8F7EF]' : 'bg-[#FFF3EE]'}`}>
+                  {isVendor() ? <MdStorefront size={26} className="text-[#00853D]" /> : <MdShoppingBag size={24} className="text-[#F85606]" />}
                 </div>
                 <div>
                   <p className="font-[800] text-[15px]">{user?.name}</p>
@@ -36,20 +36,22 @@ export default function SignInSheet() {
 
               {isVendor() && (
                 <button onClick={() => go('/vendor/dashboard')}
-                  className="w-full py-[13px] bg-[#00853D] text-white font-[800] rounded-[10px] hover:bg-[#006b31] transition-colors mb-2">
-                  Go to Vendor Dashboard →
+                  className="w-full py-[13px] bg-[#00853D] text-white font-[800] rounded-[10px] hover:bg-[#006b31] transition-colors mb-2 flex items-center justify-center gap-2">
+                  <MdStorefront size={18} /> Go to Vendor Dashboard →
                 </button>
               )}
               <button onClick={() => go('/buyer/orders')}
-                className="w-full py-[13px] bg-[#F5F5F5] text-[#1A1A1A] font-[700] rounded-[10px] border border-[#E8E8E8] hover:bg-[#EBEBEB] transition-colors mb-2">
-                My Orders
+                className="w-full py-[13px] bg-[#F5F5F5] text-[#1A1A1A] font-[700] rounded-[10px] border border-[#E8E8E8] hover:bg-[#EBEBEB] transition-colors mb-2 flex items-center justify-center gap-2">
+                <MdListAlt size={17} /> My Orders
               </button>
               <button onClick={() => { clearAuth(); closeSignIn() }}
-                className="w-full py-[12px] text-[#E01D1D] font-[700] text-[13px]">Sign Out</button>
+                className="w-full py-[12px] text-[#E01D1D] font-[700] text-[13px] flex items-center justify-center gap-2">
+                <MdLogout size={16} /> Sign Out
+              </button>
             </>
           ) : (
             <>
-              <h2 className="text-[20px] font-[800] text-center mb-1" style={{ fontFamily: 'var(--font-syne, system-ui)' }}>Join Vendoor</h2>
+              <h2 className="text-[20px] font-[800] text-center mb-1">Join Vendoor</h2>
               <p className="text-[13px] text-[#757575] text-center mb-5">Sign in to track orders, get deals, or start selling</p>
               <button onClick={() => go('/auth')}
                 className="w-full py-[14px] bg-[#F85606] text-white text-[15px] font-[800] rounded-[10px] hover:bg-[#e84e05] transition-colors mb-2">

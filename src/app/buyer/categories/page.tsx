@@ -1,19 +1,27 @@
 'use client'
 import { useRouter } from 'next/navigation'
+import {
+  FaMobileAlt, FaLaptop, FaTshirt, FaMale, FaSprayCan,
+  FaShoppingCart, FaDumbbell, FaSeedling,
+} from 'react-icons/fa'
+import { GiPerfumeBottle, GiWaterDrop, GiSofa, GiArmchair } from 'react-icons/gi'
+import { MdSportsHandball } from 'react-icons/md'
+
 const CATS = [
-  { slug: 'smartphones', label: 'Phones & Tablets', icon: '📱', count: '2,400+' },
-  { slug: 'laptops', label: 'Laptops & Computing', icon: '💻', count: '800+' },
-  { slug: 'womens-clothing', label: "Women's Fashion", icon: '👗', count: '5,100+' },
-  { slug: 'mens-clothing', label: "Men's Fashion", icon: '👔', count: '3,200+' },
-  { slug: 'beauty', label: 'Beauty & Health', icon: '✨', count: '1,900+' },
-  { slug: 'fragrances', label: 'Fragrances', icon: '🌸', count: '440+' },
-  { slug: 'home-decoration', label: 'Home Decor', icon: '🛋️', count: '1,200+' },
-  { slug: 'furniture', label: 'Furniture', icon: '🪑', count: '600+' },
-  { slug: 'groceries', label: 'Groceries & Food', icon: '🛒', count: '3,800+' },
-  { slug: 'sports-accessories', label: 'Sports & Fitness', icon: '🏋️', count: '900+' },
-  { slug: 'skin-care', label: 'Skincare', icon: '💧', count: '700+' },
-  { slug: 'tops', label: 'Tops & T-Shirts', icon: '👕', count: '1,600+' },
+  { slug: 'smartphones', label: 'Phones & Tablets', icon: FaMobileAlt, color: '#0066CC', count: '2,400+' },
+  { slug: 'laptops', label: 'Laptops & Computing', icon: FaLaptop, color: '#7C3AED', count: '800+' },
+  { slug: 'womens-clothing', label: "Women's Fashion", icon: FaTshirt, color: '#E01D1D', count: '5,100+' },
+  { slug: 'mens-clothing', label: "Men's Fashion", icon: FaMale, color: '#1A1A1A', count: '3,200+' },
+  { slug: 'beauty', label: 'Beauty & Health', icon: FaSprayCan, color: '#F85606', count: '1,900+' },
+  { slug: 'fragrances', label: 'Fragrances', icon: GiPerfumeBottle, color: '#7C3AED', count: '440+' },
+  { slug: 'home-decoration', label: 'Home Decor', icon: GiSofa, color: '#B45309', count: '1,200+' },
+  { slug: 'furniture', label: 'Furniture', icon: GiArmchair, color: '#92400E', count: '600+' },
+  { slug: 'groceries', label: 'Groceries & Food', icon: FaShoppingCart, color: '#00853D', count: '3,800+' },
+  { slug: 'sports-accessories', label: 'Sports & Fitness', icon: FaDumbbell, color: '#0066CC', count: '900+' },
+  { slug: 'skin-care', label: 'Skincare', icon: GiWaterDrop, color: '#0891B2', count: '700+' },
+  { slug: 'tops', label: 'Tops & T-Shirts', icon: FaTshirt, color: '#6B7280', count: '1,600+' },
 ]
+
 export default function CategoriesPage() {
   const router = useRouter()
   return (
@@ -25,16 +33,22 @@ export default function CategoriesPage() {
       </div>
       <div className="max-w-[1280px] mx-auto px-[14px] pb-8">
         <div className="bg-white rounded-[6px] p-[18px] shadow-[var(--sh)]">
-          <h1 className="text-[16px] font-[800] mb-4 pb-[10px] border-b border-[#E8E8E8]" style={{ fontFamily: 'var(--font-syne, system-ui)' }}>All Categories</h1>
+          <h1 className="text-[16px] font-[800] mb-4 pb-[10px] border-b border-[#E8E8E8]">All Categories</h1>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-            {CATS.map((c) => (
-              <button key={c.slug} onClick={() => router.push(`/buyer/category/${c.slug}`)}
-                className="flex flex-col items-center gap-2 p-4 rounded-[10px] border border-[#E8E8E8] hover:border-[#F85606] hover:bg-[#FFF3EE] transition-all group">
-                <span className="text-3xl group-hover:scale-110 transition-transform">{c.icon}</span>
-                <span className="text-[13px] font-[700] text-center leading-[1.2]">{c.label}</span>
-                <span className="text-[10px] text-[#ABABAB] font-[600]">{c.count} products</span>
-              </button>
-            ))}
+            {CATS.map((c) => {
+              const Icon = c.icon
+              return (
+                <button key={c.slug} onClick={() => router.push(`/buyer/category/${c.slug}`)}
+                  className="flex flex-col items-center gap-2 p-4 rounded-[10px] border border-[#E8E8E8] hover:border-[#F85606] hover:bg-[#FFF3EE] transition-all group">
+                  <div className="w-12 h-12 rounded-[12px] flex items-center justify-center group-hover:scale-110 transition-transform"
+                    style={{ background: c.color + '18' }}>
+                    <Icon size={24} style={{ color: c.color }} />
+                  </div>
+                  <span className="text-[13px] font-[700] text-center leading-[1.2]">{c.label}</span>
+                  <span className="text-[10px] text-[#ABABAB] font-[600]">{c.count} products</span>
+                </button>
+              )
+            })}
           </div>
         </div>
       </div>

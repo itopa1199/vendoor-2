@@ -1,6 +1,6 @@
 'use client'
 import { useRouter, usePathname } from 'next/navigation'
-import { Home, Grid, ShoppingCart, User } from 'lucide-react'
+import { MdHome, MdGridView, MdShoppingCart, MdPerson } from 'react-icons/md'
 import { useCartStore } from '@/store/cart'
 import { useUIStore } from '@/store/ui'
 import { cn } from '@/lib/utils'
@@ -12,10 +12,10 @@ export default function BottomNav() {
   const { openCart, openSignIn } = useUIStore()
 
   const items = [
-    { id: 'home', label: 'Home', icon: Home, href: '/buyer', action: () => router.push('/buyer') },
-    { id: 'cats', label: 'Categories', icon: Grid, href: '/buyer/categories', action: () => router.push('/buyer/categories') },
-    { id: 'cart', label: 'Cart', icon: ShoppingCart, href: null, action: openCart, badge: count },
-    { id: 'account', label: 'Account', icon: User, href: null, action: openSignIn },
+    { id: 'home', label: 'Home', icon: MdHome, href: '/buyer', action: () => router.push('/buyer') },
+    { id: 'cats', label: 'Categories', icon: MdGridView, href: '/buyer/categories', action: () => router.push('/buyer/categories') },
+    { id: 'cart', label: 'Cart', icon: MdShoppingCart, href: null, action: openCart, badge: count },
+    { id: 'account', label: 'Account', icon: MdPerson, href: null, action: openSignIn },
   ]
 
   return (
@@ -27,7 +27,7 @@ export default function BottomNav() {
             <button key={id} onClick={action}
               className={cn('flex flex-col items-center gap-[2px] px-[10px] pt-[6px] pb-1 text-[10px] font-[800] transition-colors', active ? 'text-[#F85606]' : 'text-[#ABABAB]')}>
               <span className="relative w-6 h-6 flex items-center justify-center">
-                <Icon size={22} />
+                <Icon size={24} />
                 {badge != null && badge > 0 && (
                   <span className="absolute -top-[1px] -right-[5px] bg-[#F85606] text-white text-[9px] font-[900] min-w-[15px] h-[15px] rounded-full px-[3px] flex items-center justify-center">{badge}</span>
                 )}
