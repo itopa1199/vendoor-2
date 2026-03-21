@@ -31,3 +31,14 @@ export async function fileToBase64(file: File): Promise<string> {
 export function isValidEmail(v: string) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) }
 export function isValidPhone(v: string) { return /^(\+234|0)[789][01]\d{8}$/.test(v.replace(/\s/g, '')) }
 export function truncate(s: string, n = 60) { return s?.length > n ? s.slice(0, n) + '…' : s }
+
+/** Deduplicate an array by a string key. Safe to use on any API response. */
+export function dedupe<T>(arr: T[], key: keyof T): T[] {
+  const seen = new Set<unknown>()
+  return arr.filter((item) => {
+    const k = item[key]
+    if (seen.has(k)) return false
+    seen.add(k)
+    return true
+  })
+}

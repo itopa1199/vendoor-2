@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { productsApi } from '@/lib/api'
+import { dedupe } from '@/lib/utils'
 import type { Product } from '@/types'
 import ProductCard from '@/components/buyer/ProductCard'
 import { ProductCardSkeleton } from '@/components/ui/Skeleton'
@@ -26,7 +27,7 @@ export default function CategoryPage() {
   useEffect(() => {
     setLoading(true)
     productsApi.fetch({ category: slug, limit: 40 })
-      .then((r) => { const p = r.data.products ?? []; setProducts(p); setFiltered(p) })
+      .then((r) => { const p = dedupe(r.data.products ?? [], 'product_uuid'); setProducts(p); setFiltered(p) })
       .catch(() => {}).finally(() => setLoading(false))
   }, [slug])
 

@@ -4,34 +4,34 @@ import type {
   VendorDashboardStats, VendorProduct, IncomingOrder, VendorAnalytic, ChatMessage,
 } from '@/types'
 
-const ecom = (body: Record<string, unknown>) => client.post(ECOM_URL, body)
-const vcom = (body: Record<string, unknown>) => client.post(VENDOR_URL, body)
+const ecom = (body: Record<string, unknown>) => client.post('/ecommerce', body)
+const vcom = (body: Record<string, unknown>) => client.post('/vendor-commerce', body)
 
 // ── Auth ──────────────────────────────────────────────────────────────────────
 export const authApi = {
   signUp: (d: { name: string; email: string; phone: string; password: string; account_type: AccountType }) =>
-    client.post<SignUpResponse>(`${BASE_URL}/signup`, d),
+    client.post<SignUpResponse>('/signup', d),
 
   signIn: (d: { email?: string; phone?: string; password: string; device_info?: string }) =>
-    client.post<SignInResponse>(`${BASE_URL}/signin`, { ...d, version: 2 }),
+    client.post<SignInResponse>('/signin', { ...d, version: 2 }),
 
-  sendOtp: (email: string) => client.post(`${BASE_URL}/send-otp`, { email }),
+  sendOtp: (email: string) => client.post('/send-otp', { email }),
 
   verifyOtp: (d: { otp: string; otp_uuid?: string; email?: string }) =>
-    client.post<OtpVerifyResponse>(`${BASE_URL}/verify-otp`, d),
+    client.post<OtpVerifyResponse>('/verify-otp', d),
 
-  forgotPassword: (email: string) => client.post(`${BASE_URL}/forgot-password`, { email }),
+  forgotPassword: (email: string) => client.post('/forgot-password', { email }),
 
   resetPassword: (d: { token: string; password: string }) =>
-    client.post(`${BASE_URL}/reset-password`, d),
+    client.post('/reset-password', d),
 }
 
 export const profileApi = {
   update: (d: { name?: string; email?: string; phone?: string }) =>
-    client.post(`${BASE_URL}/update-profile`, d),
+    client.post('/update-profile', d),
 
   uploadImage: (image: string) =>
-    client.post<{ status: boolean; imagePath: string }>(`${BASE_URL}/upload-image`, { image }),
+    client.post<{ status: boolean; imagePath: string }>('/upload-image', { image }),
 }
 
 // ── Buyer / Ecommerce ─────────────────────────────────────────────────────────

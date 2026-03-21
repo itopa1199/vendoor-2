@@ -31,7 +31,7 @@ export async function refreshJwtToken() {
   if (!uuid || !refresh) return null
   if (_refreshing) return _refreshing
   _refreshing = axios
-    .post(`${BASE_URL}/refresh-jwt`, { uuid }, {
+    .post(`/vd-api/refresh-jwt`, { uuid }, {
       headers: { Authorization: `Bearer ${refresh}`, 'Content-Type': 'application/json' },
     })
     .then((r) => {

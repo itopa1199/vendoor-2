@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { productsApi } from '@/lib/api'
+import { dedupe } from '@/lib/utils'
 import type { Product, Vendor } from '@/types'
 import ProductCard from '@/components/buyer/ProductCard'
 import { ProductCardSkeleton } from '@/components/ui/Skeleton'
@@ -18,7 +19,7 @@ export default function SearchPage() {
     if (!q) return
     setLoading(true)
     productsApi.search(q)
-      .then((r) => { setProducts(r.data.products ?? []); setVendors(r.data.vendors ?? []) })
+      .then((r) => { setProducts(dedupe(r.data.products ?? [], 'product_uuid')); setVendors(dedupe(r.data.vendors ?? [], 'uuid')) })
       .catch(() => {}).finally(() => setLoading(false))
   }, [q])
 

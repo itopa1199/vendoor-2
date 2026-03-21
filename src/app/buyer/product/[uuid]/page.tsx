@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { productsApi, reviewsApi } from '@/lib/api'
 import type { Product, Review } from '@/types'
-import { ngn, parseImages } from '@/lib/utils'
+import { ngn, parseImages, dedupe } from '@/lib/utils'
 import { useCart } from '@/hooks/useCart'
 import Stars from '@/components/ui/Stars'
 import ProductCard from '@/components/buyer/ProductCard'
@@ -33,7 +33,7 @@ export default function ProductPage() {
         setReviews(rr.data.reviews ?? [])
         if (p?.vendor_uuid) {
           productsApi.fetch({ vendor_uuid: p.vendor_uuid, limit: 8 })
-            .then((r) => setRelated((r.data.products ?? []).filter((x) => x.product_uuid !== uuid)))
+            .then((r) => setRelated(dedupe((r.data.products ?? []).filter((x) => x.product_uuid !== uuid), 'product_uuid')))
             .catch(() => {})
         }
       }).catch(() => {}).finally(() => setLoading(false))

@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { vendorsApi } from '@/lib/api'
+import { dedupe } from '@/lib/utils'
 import type { Vendor } from '@/types'
 import Stars from '@/components/ui/Stars'
 
@@ -9,7 +10,7 @@ export default function VendorsPage() {
   const router = useRouter()
   const [vendors, setVendors] = useState<Vendor[]>([])
   const [loading, setLoading] = useState(true)
-  useEffect(() => { vendorsApi.browse().then((r) => setVendors(r.data.vendors ?? [])).catch(() => {}).finally(() => setLoading(false)) }, [])
+  useEffect(() => { vendorsApi.browse().then((r) => setVendors(dedupe(r.data.vendors ?? [], 'uuid'))).catch(() => {}).finally(() => setLoading(false)) }, [])
   return (
     <div className="page-enter">
       <div className="max-w-[1280px] mx-auto px-[14px] py-4">

@@ -18,7 +18,17 @@ export default function VendorProfilePage() {
     if (!uuid) return
     setLoading(true)
     Promise.all([vendorsApi.view(uuid), productsApi.fetch({ vendor_uuid: uuid, limit: 40 })])
-      .then(([vr, pr]) => { setVendor(vr.data.vendor ?? null); setProducts(pr.data.products ?? []) })
+      .then(([vr, pr]) => {
+        setVendor(vr.data.vendor ?? null)
+        // Deduplicate by product_uuid in case API returns duplicates
+        const seen = new Set<string>()
+        const unique = (pr.data.products ?? []).filter((p) => {
+          if (seen.has(p.product_uuid)) return false
+          seen.add(p.product_uuid)
+          return true
+        })
+        setProducts(unique)
+      })
       .catch(() => {}).finally(() => setLoading(false))
   }, [uuid])
 

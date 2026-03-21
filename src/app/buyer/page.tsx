@@ -14,7 +14,7 @@ import { productsApi, vendorsApi } from '@/lib/api'
 import type { Product, Vendor } from '@/types'
 import ProductCard from '@/components/buyer/ProductCard'
 import { ProductCardSkeleton } from '@/components/ui/Skeleton'
-import { ngn } from '@/lib/utils'
+import { ngn, dedupe } from '@/lib/utils'
 
 const SLIDES = [
   { tag: 'Flash Sale', title: 'Up to 60% off Electronics', sub: 'Phones, laptops, earbuds — shipped same day', cat: 'smartphones', bg: 'linear-gradient(135deg,#1a1a2e,#0f3460)' },
@@ -85,7 +85,7 @@ export default function BuyerHomePage() {
       setLoading((l) => ({ ...l, [cat]: true }))
       try {
         const r = await productsApi.fetch({ category: cat, limit: 10 })
-        setProds((p) => ({ ...p, [cat]: r.data.products ?? [] }))
+        setProds((p) => ({ ...p, [cat]: dedupe(r.data.products ?? [], 'product_uuid') }))
       } catch {} finally { setLoading((l) => ({ ...l, [cat]: false })) }
     })
     vendorsApi.browse().then((r) => setVendors(r.data.vendors ?? [])).catch(() => {})
