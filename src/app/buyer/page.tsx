@@ -3,12 +3,13 @@ import { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import {
   MdFlashOn, MdLocalShipping, MdVerified, MdStorefront,
+  MdPhone, MdHome, MdLocalGroceryStore,
 } from 'react-icons/md'
 import {
   FaMobileAlt, FaLaptop, FaTshirt, FaMale, FaSprayCan,
-  FaShoppingCart, FaCouch, FaDumbbell, FaSeedling, FaStar,
+  FaShoppingCart, FaDumbbell, FaLeaf, FaStar,
 } from 'react-icons/fa'
-import { GiPerfumeBottle, GiWaterDrop } from 'react-icons/gi'
+import { BsDropletFill } from 'react-icons/bs'
 import { productsApi, vendorsApi } from '@/lib/api'
 import type { Product, Vendor } from '@/types'
 import ProductCard from '@/components/buyer/ProductCard'
@@ -29,10 +30,10 @@ const CATEGORIES = [
   { slug: 'mens-clothing', label: "Men's", icon: FaMale, color: '#1A1A1A' },
   { slug: 'beauty', label: 'Beauty', icon: FaSprayCan, color: '#F85606' },
   { slug: 'groceries', label: 'Groceries', icon: FaShoppingCart, color: '#00853D' },
-  { slug: 'home-decoration', label: 'Home', icon: FaCouch, color: '#B45309' },
+  { slug: 'home-decoration', label: 'Home', icon: MdHome, color: '#B45309' },
   { slug: 'sports-accessories', label: 'Sports', icon: FaDumbbell, color: '#0066CC' },
-  { slug: 'fragrances', label: 'Fragrances', icon: GiPerfumeBottle, color: '#7C3AED' },
-  { slug: 'skin-care', label: 'Skincare', icon: GiWaterDrop, color: '#0891B2' },
+  { slug: 'fragrances', label: 'Fragrances', icon: FaLeaf, color: '#7C3AED' },
+  { slug: 'skin-care', label: 'Skincare', icon: BsDropletFill, color: '#0891B2' },
 ]
 
 const SECTIONS = [

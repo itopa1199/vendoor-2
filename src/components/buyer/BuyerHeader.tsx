@@ -2,7 +2,6 @@
 import { useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { MdSearch, MdShoppingCart, MdPerson, MdStorefront } from 'react-icons/md'
-import { FaMobileAlt, FaLaptop, FaTshirt, FaSprayCan, FaShoppingCart, FaCouch, FaDumbbell, GiPerfumeBottle } from 'react-icons/fa'
 import { useCartStore } from '@/store/cart'
 import { useUIStore } from '@/store/ui'
 import { cn } from '@/lib/utils'
@@ -43,7 +42,8 @@ export default function BuyerHeader() {
             <input type="text" value={q} onChange={(e) => setQ(e.target.value)}
               placeholder="Search products, brands, vendors…"
               className="flex-1 border-none outline-none px-[14px] py-[10px] text-sm min-w-0" />
-            <button type="submit" className="bg-[#FFC200] px-[18px] flex items-center justify-center flex-shrink-0 hover:bg-[#e6af00] transition-colors">
+            <button type="submit"
+              className="bg-[#FFC200] px-[18px] flex items-center justify-center flex-shrink-0 hover:bg-[#e6af00] transition-colors">
               <MdSearch size={20} />
             </button>
           </form>
@@ -59,7 +59,9 @@ export default function BuyerHeader() {
                 <span className="relative">
                   <Icon size={23} />
                   {badge > 0 && (
-                    <span className="absolute -top-[3px] -right-[3px] bg-[#FFC200] text-black text-[9px] font-[900] min-w-[15px] h-[15px] rounded-full px-[3px] flex items-center justify-center">{badge}</span>
+                    <span className="absolute -top-[3px] -right-[3px] bg-[#FFC200] text-black text-[9px] font-[900] min-w-[15px] h-[15px] rounded-full px-[3px] flex items-center justify-center">
+                      {badge}
+                    </span>
                   )}
                 </span>
                 <span className="hidden sm:block">{label}</span>
@@ -73,8 +75,12 @@ export default function BuyerHeader() {
         <div className="max-w-[1280px] mx-auto px-[14px] flex overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {CATS.map((c) => (
             <button key={c.slug} onClick={() => router.push(`/buyer/category/${c.slug}`)}
-              className={cn('px-[14px] py-[9px] text-[13px] font-[700] whitespace-nowrap border-b-2 transition-all flex-shrink-0',
-                pathname?.includes(`/buyer/category/${c.slug}`) ? 'text-[#F85606] border-[#F85606]' : 'text-[#757575] border-transparent hover:text-[#F85606]')}>
+              className={cn(
+                'px-[14px] py-[9px] text-[13px] font-[700] whitespace-nowrap border-b-2 transition-all flex-shrink-0',
+                pathname?.includes(`/buyer/category/${c.slug}`)
+                  ? 'text-[#F85606] border-[#F85606]'
+                  : 'text-[#757575] border-transparent hover:text-[#F85606]'
+              )}>
               {c.label}
             </button>
           ))}

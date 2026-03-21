@@ -1,25 +1,27 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import {
-  FaMobileAlt, FaLaptop, FaTshirt, FaMale, FaSprayCan,
-  FaShoppingCart, FaDumbbell, FaSeedling,
+  MdPhone, MdLaptop, MdChair, MdHome, MdLocalGroceryStore,
+} from 'react-icons/md'
+import {
+  FaTshirt, FaMale, FaSprayCan, FaDumbbell, FaLeaf,
 } from 'react-icons/fa'
-import { GiPerfumeBottle, GiWaterDrop, GiSofa, GiArmchair } from 'react-icons/gi'
-import { MdSportsHandball } from 'react-icons/md'
+import { BsDropletFill, BsFillBagFill, BsBagFill } from 'react-icons/bs'
+import { IoWater } from 'react-icons/io5'
 
 const CATS = [
-  { slug: 'smartphones', label: 'Phones & Tablets', icon: FaMobileAlt, color: '#0066CC', count: '2,400+' },
-  { slug: 'laptops', label: 'Laptops & Computing', icon: FaLaptop, color: '#7C3AED', count: '800+' },
-  { slug: 'womens-clothing', label: "Women's Fashion", icon: FaTshirt, color: '#E01D1D', count: '5,100+' },
-  { slug: 'mens-clothing', label: "Men's Fashion", icon: FaMale, color: '#1A1A1A', count: '3,200+' },
-  { slug: 'beauty', label: 'Beauty & Health', icon: FaSprayCan, color: '#F85606', count: '1,900+' },
-  { slug: 'fragrances', label: 'Fragrances', icon: GiPerfumeBottle, color: '#7C3AED', count: '440+' },
-  { slug: 'home-decoration', label: 'Home Decor', icon: GiSofa, color: '#B45309', count: '1,200+' },
-  { slug: 'furniture', label: 'Furniture', icon: GiArmchair, color: '#92400E', count: '600+' },
-  { slug: 'groceries', label: 'Groceries & Food', icon: FaShoppingCart, color: '#00853D', count: '3,800+' },
-  { slug: 'sports-accessories', label: 'Sports & Fitness', icon: FaDumbbell, color: '#0066CC', count: '900+' },
-  { slug: 'skin-care', label: 'Skincare', icon: GiWaterDrop, color: '#0891B2', count: '700+' },
-  { slug: 'tops', label: 'Tops & T-Shirts', icon: FaTshirt, color: '#6B7280', count: '1,600+' },
+  { slug: 'smartphones',       label: 'Phones & Tablets',  icon: MdPhone,            color: '#0066CC', count: '2,400+' },
+  { slug: 'laptops',           label: 'Laptops',            icon: MdLaptop,           color: '#7C3AED', count: '800+' },
+  { slug: 'womens-clothing',   label: "Women's Fashion",    icon: FaTshirt,           color: '#E01D1D', count: '5,100+' },
+  { slug: 'mens-clothing',     label: "Men's Fashion",      icon: FaMale,             color: '#1A1A1A', count: '3,200+' },
+  { slug: 'beauty',            label: 'Beauty & Health',    icon: FaSprayCan,         color: '#F85606', count: '1,900+' },
+  { slug: 'fragrances',        label: 'Fragrances',         icon: FaLeaf,             color: '#7C3AED', count: '440+' },
+  { slug: 'home-decoration',   label: 'Home Decor',         icon: MdHome,             color: '#B45309', count: '1,200+' },
+  { slug: 'furniture',         label: 'Furniture',          icon: MdChair,            color: '#92400E', count: '600+' },
+  { slug: 'groceries',         label: 'Groceries & Food',   icon: MdLocalGroceryStore,color: '#00853D', count: '3,800+' },
+  { slug: 'sports-accessories',label: 'Sports & Fitness',   icon: FaDumbbell,         color: '#0066CC', count: '900+' },
+  { slug: 'skin-care',         label: 'Skincare',           icon: BsDropletFill,      color: '#0891B2', count: '700+' },
+  { slug: 'tops',              label: 'Tops & T-Shirts',    icon: BsFillBagFill,      color: '#6B7280', count: '1,600+' },
 ]
 
 export default function CategoriesPage() {
@@ -28,7 +30,9 @@ export default function CategoriesPage() {
     <div className="page-enter">
       <div className="bg-white py-[9px] border-b border-[#E8E8E8] mb-[10px]">
         <div className="max-w-[1280px] mx-auto px-[14px] text-xs text-[#757575]">
-          <button onClick={() => router.push('/buyer')} className="hover:text-[#F85606]">Home</button> › <span className="text-[#1A1A1A]">All Categories</span>
+          <button onClick={() => router.push('/buyer')} className="hover:text-[#F85606]">Home</button>
+          {' › '}
+          <span className="text-[#1A1A1A]">All Categories</span>
         </div>
       </div>
       <div className="max-w-[1280px] mx-auto px-[14px] pb-8">

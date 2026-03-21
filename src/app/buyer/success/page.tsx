@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { MdCheckCircle, MdLocalShipping, MdStorefront, MdInventory2 } from 'react-icons/md'
-import { FaPartyPopper } from 'react-icons/fa6'
 import { BsFillBoxSeamFill } from 'react-icons/bs'
 
 const STEPS = [

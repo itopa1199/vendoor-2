@@ -2,9 +2,8 @@
 import { useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import toast from 'react-hot-toast'
-import { MdEmail, MdPhone, MdLock, MdVisibility, MdVisibilityOff, MdPerson, MdStorefront } from 'react-icons/md'
+import { MdEmail, MdPhone, MdLock, MdVisibility, MdVisibilityOff, MdPerson, MdStorefront, MdVerified } from 'react-icons/md'
 import { FaShoppingBag } from 'react-icons/fa'
-import { HiShieldCheck } from 'react-icons/hi'
 import { authApi } from '@/lib/api'
 import { useAuthStore } from '@/store/auth'
 import { isValidEmail, isValidPhone, getDeviceInfo } from '@/lib/utils'
@@ -247,7 +246,7 @@ export default function AuthPage() {
                 onKeyDown={(e) => e.key === 'Enter' && handleOtp()} autoFocus />
               <button onClick={handleOtp} disabled={loading || otp.code.length < 4}
                 className="w-full py-[13px] bg-[#F85606] text-white text-[15px] font-[800] rounded-[10px] hover:bg-[#e84e05] transition-colors disabled:opacity-60 mb-3 flex items-center justify-center gap-2">
-                <HiShieldCheck size={18} /> {loading ? 'Verifying…' : 'Verify & Continue →'}
+                <MdVerified size={18} /> {loading ? 'Verifying…' : 'Verify & Continue →'}
               </button>
               <button onClick={async () => { try { await authApi.sendOtp(otp.email); toast.success('OTP resent!') } catch { toast.error('Failed') } }}
                 className="text-[13px] text-[#757575]">Didn't get it? <span className="text-[#F85606] font-[700]">Resend OTP</span></button>
